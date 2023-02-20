@@ -180,6 +180,21 @@ RSpec.describe User, type: :model do
 
       expect(User.authenticate_with_credentials("  testfirst_testlast@test.com", "tester1")).to be_present
     end
+
+    it "should create a user even if thier email case is different" do
+      
+      @user = User.new({
+          first_name: "Test First Name",
+          last_name: "Test Last Name",
+          email: "testfirst_testlast@test.com",
+          password: "tester1",
+          password_confirmation: "tester1"
+        })
+
+        @user.save!
+
+      expect(User.authenticate_with_credentials("TESTfirst_testlast@test.com", "tester1")).to be_present
+    end
   end
 
 end
