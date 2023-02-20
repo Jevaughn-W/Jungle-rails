@@ -114,6 +114,21 @@ RSpec.describe User, type: :model do
       }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
+    it "should only create users with a password with 3 or more characters" do
+      expect {
+        @user = User.new({
+          first_name: "Test First Name",
+          last_name: "Test Last Name",
+          email: "testfirst_testlast@test.com",
+          password: "t1",
+          password_confirmation: "t1"
+        })
+
+        @user.save!
+      }.to raise_error(ActiveRecord::RecordInvalid)
+    
+    end
+
 
   end
 
