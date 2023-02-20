@@ -13,8 +13,12 @@
       <div class="form-group">
         Last Name: <%= f.text_field :last_name %>
       </div>
+
       <div class="form-group">
         email: <%= f.text_field :email %>
+        <% @user.errors.full_messages_for(:email).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
       </div>
       
       <div class="form-group">
@@ -23,12 +27,16 @@
           <div><%= message %></div>
         <% end %>
       </div>
-      
+          
       <div class="form-group">
         Password Confirmation: <%= f.password_field :password_confirmation %>
+        <% @user.errors.full_messages_for(:password_confirmation).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
       </div>
       
-        <%= f.submit "Submit" %>
+      <%= f.submit "Submit" %>
+      
     <% end %>
   </div>
 </div>
